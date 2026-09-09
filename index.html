@@ -168,17 +168,19 @@ details p { margin: 8px 0 0 14px; line-height: 1.65; }
 .chanico svg { display: block; }
 
 /* strategies */
-.strat { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 13px; align-items: stretch; }
+.strat { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 13px; align-items: stretch; }
 .play { padding: 18px 19px 19px; display: flex; flex-direction: column; }
 .playtop { display: flex; align-items: center; gap: 10px; }
 .badge { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; color: #fff; flex: 0 0 auto; }
 .badge.stop { background: linear-gradient(140deg, #ef8080, #cf4a4a); }
 .badge.grow { background: linear-gradient(140deg, #57c98a, #1e8a50); }
 .badge.back { background: linear-gradient(140deg, #6B9AFF, #2B4FB3); }
+.badge.conq { background: linear-gradient(140deg, #F2C811, #d8a800); color: #3B2F00; }
 .playtop h3 { font-size: 13px; font-weight: 700; }
 .playtop .verb { font-size: 11px; font-weight: 650; color: var(--ink40); }
 .headline { font-size: 27px; font-weight: 800; letter-spacing: -.9px; margin: 14px 0 3px; font-variant-numeric: tabular-nums; }
 .headline.stop { color: var(--bad-ink); } .headline.grow { color: var(--good-ink); } .headline.back { color: var(--blue); }
+.headline.conq { color: var(--warn-ink); }
 .subline { font-size: 12px; color: var(--ink60); line-height: 1.5; }
 .picks { margin-top: 15px; display: flex; flex-direction: column; gap: 9px; }
 .pick { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 4px 9px; align-items: center; }
@@ -203,13 +205,11 @@ details p { margin: 8px 0 0 14px; line-height: 1.65; }
 .bubble.stop { background: var(--bad-bg); color: var(--bad-ink); box-shadow: inset 0 0 0 1px rgba(179,38,38,.14); }
 .bubble.grow { background: var(--good-bg); color: var(--good-ink); box-shadow: inset 0 0 0 1px rgba(13,107,52,.14); }
 .bubble.back { background: rgba(70,123,255,.13); color: var(--blue); box-shadow: inset 0 0 0 1px rgba(70,123,255,.18); }
-.gapstrip { margin-top: 13px; padding: 15px 19px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.gapstrip .badge { background: linear-gradient(140deg, #F2C811, #d8a800); color: #3B2F00; }
-.gapstrip .txt b { display: block; font-size: 12.5px; font-weight: 700; }
-.gapstrip .txt span { display: block; font-size: 11.5px; color: var(--ink60); margin-top: 2px; }
-.rivals { display: flex; flex-wrap: wrap; gap: 6px; margin-left: auto; }
-.rivals span { background: rgba(70,123,255,.09); border-radius: 999px; padding: 5px 11px; font-size: 11px; font-weight: 600; }
-.rivals span.us { background: var(--bad-bg); color: var(--bad-ink); }
+.bubble.conq { background: var(--warn-bg); color: var(--warn-ink); box-shadow: inset 0 0 0 1px rgba(138,95,0,.16); }
+.rivals { margin-top: 15px; display: flex; flex-direction: column; gap: 9px; }
+.rival { display: flex; align-items: center; gap: 9px; font-size: 12px; font-weight: 600; }
+.rmark { width: 26px; height: 26px; border-radius: 7px; display: inline-grid; place-items: center; flex: 0 0 auto;
+  font-size: 10.5px; font-weight: 800; letter-spacing: -.2px; box-shadow: 0 1px 3px rgba(0,8,50,.16); }
 
 .err { background: var(--bad-bg); color: var(--bad-ink); padding: 12px 16px; border-radius: var(--r-md);
   margin-bottom: 14px; display: none; font-size: 12.5px; }
@@ -247,8 +247,6 @@ details p { margin: 8px 0 0 14px; line-height: 1.65; }
   .seg { flex: 1 1 0; justify-content: center; padding: 9px 6px; font-size: 11px; text-align: center; }
   .filters select { flex: 1 1 auto; padding: 9px 12px; }
   .fcount { margin-left: 0; width: 100%; }
-  .gapstrip { flex-direction: column; align-items: flex-start; gap: 11px; }
-  .rivals { margin-left: 0; }
   .headline { font-size: 24px; }
   details { max-width: none; }
 }
@@ -260,7 +258,6 @@ details p { margin: 8px 0 0 14px; line-height: 1.65; }
   .ring .mid b { font-size: 18px; }
   .fstage b { font-size: 16px; }
   .fstage.s4 { width: 74%; }
-  .rivals span { font-size: 10.5px; padding: 4px 9px; }
   .seg b { display: none; }
   .seg { font-size: 11.5px; }
 }
@@ -342,11 +339,6 @@ details p { margin: 8px 0 0 14px; line-height: 1.65; }
   <div class="sechead"><h2>AI suggested strategies</h2>
     <p class="subtle">All channels, not just the one selected.</p></div>
   <div class="strat" id="playbook"></div>
-  <div class="card gapstrip">
-    <div class="badge"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="9" r="6.2"/><circle cx="9" cy="9" r="2.4"/></svg></div>
-    <div class="txt"><b>Win clients away from our competitors</b><span>Rivals actively target each other's traders. We don't.</span></div>
-    <div class="rivals" id="rivals"></div>
-  </div>
 </section>
 
 <script>
@@ -600,8 +592,17 @@ const STRAT_ICON = {
   stop: '<svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="5" y="5" width="3" height="8" rx="1" fill="currentColor" stroke="none"/><rect x="10" y="5" width="3" height="8" rx="1" fill="currentColor" stroke="none"/></svg>',
   grow: '<svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12.5 7 8l3 2.6L15 5"/><path d="M11.4 5H15v3.6"/></svg>',
   back: '<svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 9a5.4 5.4 0 1 0 1.9-4.1"/><path d="M3.2 3.4v3.2h3.2"/></svg>',
-  arrow: '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h9.5M8.8 4.3 12.5 8l-3.7 3.7"/></svg>'
+  arrow: '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h9.5M8.8 4.3 12.5 8l-3.7 3.7"/></svg>',
+  target: '<svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="9" r="6.2"/><circle cx="9" cy="9" r="2.4"/></svg>'
 };
+// rival lettermarks: their own brand colour, drawn here rather than pulling in trademarked artwork
+const RIVALS = [
+  {n:"Exness",      m:"EX", c:"#F0B90B", t:"#3B2F00"},
+  {n:"XM",          m:"XM", c:"#D8232A", t:"#fff"},
+  {n:"IC Markets",  m:"IC", c:"#0B4EA2", t:"#fff"},
+  {n:"Pepperstone", m:"P",  c:"#1B3A5C", t:"#fff"},
+  {n:"AvaTrade",    m:"AT", c:"#16324F", t:"#fff"}
+];
 // ---- funnel, plan-against-actual bars and lead rings. Every figure comes from the same totals as the table.
 function renderVisuals(data, chan, showPlan, cols, tot, totD, totPD){
   const nf = n => Math.round(n).toLocaleString("en-US");
@@ -749,7 +750,13 @@ function renderRecs(agg, p){
       body: '<div class="split"><i class="f" style="width:'+fShare+'%"></i><i class="u" style="width:'+(100-fShare)+'%"></i></div>'
         + '<div class="keys"><div><span class="dot" style="background:#2fae63"></span>Funded <b>'+Math.round(funTot).toLocaleString("en-US")+'</b></div>'
         + '<div><span class="dot" style="background:#C9D7FE"></span>Opened, not funded <b>'+nonFunded.toLocaleString("en-US")+'</b></div></div>',
-      next:"Retarget by email and WhatsApp" }
+      next:"Retarget by Email and WhatsApp" },
+    { cls:"conq", verb:"Conquest", icon:STRAT_ICON.target, title:"Win clients away from our competitors",
+      big:"0",
+      sub:"campaigns of ours target rival traders. All five of these run them.",
+      body: '<div class="rivals">' + RIVALS.map(r =>
+        '<div class="rival"><span class="rmark" style="background:'+r.c+';color:'+r.t+'">'+r.m+'</span>'+r.n+'</div>').join("") + '</div>',
+      next:"Test competitor audiences" }
   ];
   document.getElementById("playbook").innerHTML = plays.map(pl =>
     '<div class="card play"><div class="playtop"><div class="badge '+pl.cls+'">'+pl.icon+'</div>'
@@ -758,9 +765,6 @@ function renderRecs(agg, p){
     + pl.body
     + '<div class="donext"><span class="bubble '+pl.cls+'">'+STRAT_ICON.arrow+pl.next+'</span></div></div>').join("");
 
-  document.getElementById("rivals").innerHTML =
-    ["Exness","XM","IC Markets","Pepperstone","AvaTrade"].map(n=>'<span>'+n+'</span>').join("")
-    + '<span class="us">MultiBank · none</span>';
 }
 
 function buildControls(){
