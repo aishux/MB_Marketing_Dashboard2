@@ -2,17 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MultiBank · Marketing Performance vs Plan · 8 Sep 2026</title>
 <style>
 :root { color-scheme: light;
   --bg: #DEE6FE; --surface: #F4F8FF; --ink: #000832; --blue: #467BFF;
-  --ink60: rgba(0,8,50,.6); --ink40: rgba(0,8,50,.42); --line: rgba(70,123,255,.14);
+  --ink60: rgba(0,8,50,.74); --ink40: rgba(0,8,50,.56); --line: rgba(70,123,255,.14);
   --deep: #2B4FB3; --sky: #55b7f0; --soft: #C9D7FE;
   --good-bg: #dcf3e3; --good-ink: #0d6b34; --warn-bg: #fdf0cd; --warn-ink: #8a5f00; --bad-bg: #fddcdc; --bad-ink: #b32626;
   --green: #2fae63; --red: #e06767; --amber: #e8b93c; --pbi: #F2C811;
   --r-lg: 18px; --r-md: 14px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
   background: var(--bg); color: var(--ink); font-size: 13px; -webkit-font-smoothing: antialiased;
   padding: 0 30px 56px; }
@@ -62,18 +64,19 @@ select { font-family: inherit; font-size: 13px; padding: 9px 14px; border: 0; bo
 .meter i.good { background: var(--green); } .meter i.warn { background: var(--amber); } .meter i.bad { background: var(--red); }
 
 /* table */
-.tablecard { overflow: auto; max-height: 62vh; }
+.tablecard { overflow: auto; max-height: 62vh; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
 table { border-collapse: separate; border-spacing: 0; width: max-content; min-width: 100%; }
 th, td { padding: 8px 12px; text-align: right; white-space: nowrap; font-size: 12.5px;
   border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
 thead th { position: sticky; top: 0; background: var(--surface); z-index: 10; }
 thead tr:first-child th { font-size: 12.5px; font-weight: 650; text-align: center; padding-top: 14px; border-bottom: none; }
-thead tr:nth-child(2) th { top: 37px; font-size: 10px; font-weight: 600; color: var(--ink40);
-  letter-spacing: .4px; border-bottom: 1px solid rgba(70,123,255,.25); }
-tbody th { position: sticky; left: 0; background: var(--surface); text-align: left; font-weight: 550; z-index: 5; }
+thead tr:nth-child(2) th { top: 37px; font-size: 11px; font-weight: 700; color: var(--ink);
+  letter-spacing: .2px; border-bottom: 1px solid rgba(70,123,255,.25); }
+tbody th { position: sticky; left: 0; background: var(--surface); text-align: left; font-weight: 650;
+  color: var(--ink); z-index: 5; }
 th.corner { position: sticky; left: 0; z-index: 20 !important; background: var(--surface); }
 td.grp, th.grp { border-left: 1px solid var(--line); }
-td.exp { color: var(--ink40); }
+td.exp { color: rgba(0,8,50,.62); }
 td.good { background: var(--good-bg); color: var(--good-ink); font-weight: 600; }
 td.warn { background: var(--warn-bg); color: var(--warn-ink); font-weight: 600; }
 td.bad  { background: var(--bad-bg); color: var(--bad-ink); font-weight: 600; }
@@ -123,7 +126,7 @@ details p { margin: 8px 0 0 14px; line-height: 1.65; }
 .rings { display: grid; grid-template-columns: repeat(auto-fill, minmax(152px, 1fr)); gap: 26px 10px; }
 .ring { text-align: center; min-width: 0; }
 .ring .dialwrap { position: relative; width: 108px; height: 108px; margin: 0 auto; }
-.ring svg { transform: rotate(-90deg); display: block; }
+.ring svg { transform: rotate(-90deg); display: block; width: 100%; height: 100%; }
 .ring .mid { position: absolute; inset: 0; display: grid; place-items: center; align-content: center; gap: 1px; }
 .ring .mid b { font-size: 21px; font-weight: 780; font-variant-numeric: tabular-nums; letter-spacing: -.6px; line-height: 1.05; }
 .ring .mid em { font-style: normal; font-size: 11.5px; color: var(--ink40); font-weight: 700; font-variant-numeric: tabular-nums; }
@@ -135,7 +138,7 @@ details p { margin: 8px 0 0 14px; line-height: 1.65; }
 @media (max-width: 620px){ .rings { grid-template-columns: 1fr 1fr; } }
 
 /* allocations */
-.alloc { padding: 6px 4px 4px; overflow: auto; }
+.alloc { padding: 6px 4px 4px; overflow: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
 .filters { display: flex; align-items: center; gap: 12px; padding: 11px 14px 12px; flex-wrap: wrap;
   border-bottom: 1px solid var(--line); }
 .segs { display: inline-flex; background: rgba(70,123,255,.08); border-radius: 999px; padding: 3px; gap: 2px; }
@@ -149,7 +152,7 @@ details p { margin: 8px 0 0 14px; line-height: 1.65; }
 .alloc td .chanico { vertical-align: -5px; margin-right: 3px; }
 .alloc table { width: 100%; }
 .alloc th, .alloc td { font-size: 12.5px; padding: 9px 14px; position: static; background: transparent; }
-.alloc thead th { font-size: 10px; color: var(--ink40); letter-spacing: .4px; font-weight: 650; text-align: right; }
+.alloc thead th { font-size: 11px; color: var(--ink); letter-spacing: .2px; font-weight: 700; text-align: right; }
 .alloc th:nth-child(-n+2), .alloc td:nth-child(-n+2), .alloc th:last-child, .alloc td:last-child { text-align: left; }
 .alloc tbody tr:last-child td { border-bottom: none; }
 .alloc tbody tr:hover td { background: rgba(70,123,255,.045); }
@@ -176,13 +179,13 @@ details p { margin: 8px 0 0 14px; line-height: 1.65; }
 .playtop .verb { font-size: 11px; font-weight: 650; color: var(--ink40); }
 .headline { font-size: 27px; font-weight: 800; letter-spacing: -.9px; margin: 14px 0 3px; font-variant-numeric: tabular-nums; }
 .headline.stop { color: var(--bad-ink); } .headline.grow { color: var(--good-ink); } .headline.back { color: var(--blue); }
-.subline { font-size: 11.5px; color: var(--ink60); line-height: 1.5; }
+.subline { font-size: 12px; color: var(--ink60); line-height: 1.5; }
 .picks { margin-top: 15px; display: flex; flex-direction: column; gap: 9px; }
-.pick { display: grid; grid-template-columns: auto 1fr auto; gap: 4px 9px; align-items: center; }
+.pick { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 4px 9px; align-items: center; }
 .pick .who { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; min-width: 0; }
 .pick .who em { font-style: normal; font-weight: 500; color: var(--ink40); font-size: 11px; white-space: nowrap;
   overflow: hidden; text-overflow: ellipsis; }
-.pick .amt { font-size: 11.5px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.pick .amt { font-size: 11.5px; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
 .pick .track { grid-column: 1 / -1; height: 7px; border-radius: 4px; background: rgba(70,123,255,.10); overflow: hidden; }
 .pick .track i { display: block; height: 100%; border-radius: 4px; }
 .pick .track i.stop { background: linear-gradient(90deg, #cf4a4a, #ef8080); }
@@ -193,9 +196,13 @@ details p { margin: 8px 0 0 14px; line-height: 1.65; }
 .keys { display: flex; flex-direction: column; gap: 6px; font-size: 11.5px; color: var(--ink60); }
 .keys div { display: flex; align-items: center; gap: 7px; }
 .keys b { color: var(--ink); font-variant-numeric: tabular-nums; font-weight: 650; }
-.donext { margin-top: auto; padding-top: 14px; font-size: 11.5px; font-weight: 650; color: var(--blue);
-  display: flex; align-items: center; gap: 7px; }
-.donext svg { flex: 0 0 auto; }
+.donext { margin-top: auto; padding-top: 15px; display: flex; }
+.bubble { display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; font-size: 12px; font-weight: 650;
+  border-radius: 16px 16px 16px 5px; line-height: 1.35; }
+.bubble svg { flex: 0 0 auto; opacity: .85; }
+.bubble.stop { background: var(--bad-bg); color: var(--bad-ink); box-shadow: inset 0 0 0 1px rgba(179,38,38,.14); }
+.bubble.grow { background: var(--good-bg); color: var(--good-ink); box-shadow: inset 0 0 0 1px rgba(13,107,52,.14); }
+.bubble.back { background: rgba(70,123,255,.13); color: var(--blue); box-shadow: inset 0 0 0 1px rgba(70,123,255,.18); }
 .gapstrip { margin-top: 13px; padding: 15px 19px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .gapstrip .badge { background: linear-gradient(140deg, #F2C811, #d8a800); color: #3B2F00; }
 .gapstrip .txt b { display: block; font-size: 12.5px; font-weight: 700; }
@@ -210,8 +217,53 @@ details p { margin: 8px 0 0 14px; line-height: 1.65; }
 
 @media (max-width: 1240px){ .kpis { grid-template-columns: repeat(3, 1fr); } .vgrid { grid-template-columns: 1fr; }
   .strat { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 900px){ body { padding: 0 16px 40px; } .kpis, .strat { grid-template-columns: 1fr 1fr; }
-  .pvrow { grid-template-columns: 96px minmax(0,1fr); } }
+@media (max-width: 900px){ body { padding: 0 16px 40px; } .kpis, .strat { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- phones and small tablets ---------- */
+.swipe { display: none; }
+@media (max-width: 760px){
+  body { padding: 0 12px 36px; }
+  .sec { margin-top: 16px; }
+  .topbar { position: static; padding: 14px 0 12px; gap: 10px; }
+  .topbar .div { display: none; }
+  .topbar h1 { font-size: 13.5px; }
+  .logo { height: 22px; }
+  .search { order: 3; flex: 1 1 100%; max-width: none; }
+  .search input { font-size: 16px; }            /* under 16px iOS zooms in on focus */
+  .tools { order: 4; margin-left: 0; width: 100%; gap: 8px; }
+  .tools select { flex: 1 1 0; min-width: 0; }
+  .pbibtn { flex: 1 1 100%; justify-content: center; padding: 11px 15px; }
+  .kpis { gap: 10px; }
+  .kpi { padding: 13px 14px; min-height: 88px; }
+  .kpi .v { font-size: 17px; letter-spacing: -.3px; }
+  .tablecard { max-height: 72vh; }
+  th, td { padding: 8px 10px; }
+  .swipe { display: block; color: var(--blue); font-weight: 600; }
+  .vgrid { grid-template-columns: 1fr; }
+  .strat { grid-template-columns: 1fr; }
+  .rings { grid-template-columns: 1fr 1fr; gap: 20px 8px; }
+  .filters { gap: 8px; padding: 10px 12px; }
+  .segs { width: 100%; justify-content: space-between; }
+  .seg { flex: 1 1 0; justify-content: center; padding: 9px 6px; font-size: 11px; text-align: center; }
+  .filters select { flex: 1 1 auto; padding: 9px 12px; }
+  .fcount { margin-left: 0; width: 100%; }
+  .gapstrip { flex-direction: column; align-items: flex-start; gap: 11px; }
+  .rivals { margin-left: 0; }
+  .headline { font-size: 24px; }
+  details { max-width: none; }
+}
+@media (max-width: 430px){
+  .kpis { grid-template-columns: 1fr; }
+  .kpi { min-height: 0; }
+  .kpi .v { font-size: 19px; }
+  .ring .dialwrap { width: 92px; height: 92px; }
+  .ring .mid b { font-size: 18px; }
+  .fstage b { font-size: 16px; }
+  .fstage.s4 { width: 74%; }
+  .rivals span { font-size: 10.5px; padding: 4px 9px; }
+  .seg b { display: none; }
+  .seg { font-size: 11.5px; }
+}
 </style>
 </head>
 <body>
@@ -251,6 +303,7 @@ details p { margin: 8px 0 0 14px; line-height: 1.65; }
     <span class="chip"><span class="dot" style="background:#e8b93c"></span>Behind</span>
     <span class="chip"><span class="dot" style="background:#e06767"></span>Off plan</span>
     <span>Expected = full-month plan &middot; Difference = Actual &minus; Expected &middot; lower is better for CPC, CPL, CPA, CPFA</span>
+    <span class="swipe">Swipe the table sideways to reach the other countries.</span>
   </div>
   <details>
     <summary>Definitions and sources</summary>
@@ -287,11 +340,11 @@ details p { margin: 8px 0 0 14px; line-height: 1.65; }
 
 <section class="sec">
   <div class="sechead"><h2>AI suggested strategies</h2>
-    <p class="subtle">Every channel is considered here, not only the one picked above.</p></div>
+    <p class="subtle">All channels, not just the one selected.</p></div>
   <div class="strat" id="playbook"></div>
   <div class="card gapstrip">
     <div class="badge"><svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="9" r="6.2"/><circle cx="9" cy="9" r="2.4"/></svg></div>
-    <div class="txt"><b>Win clients away from our competitors</b><span>Every major rival runs conquesting campaigns against each other. We run none.</span></div>
+    <div class="txt"><b>Win clients away from our competitors</b><span>Rivals actively target each other's traders. We don't.</span></div>
     <div class="rivals" id="rivals"></div>
   </div>
 </section>
@@ -671,7 +724,7 @@ function renderRecs(agg, p){
   const fShare = accTot>0 ? 100*funTot/accTot : 0;
 
   function picks(list, kind){
-    if (!list.length) return '<div class="subline" style="margin-top:14px">Nothing in this bucket for the selected period.</div>';
+    if (!list.length) return '<div class="subline" style="margin-top:14px">Nothing here this period.</div>';
     const max = Math.max(...list.map(r=>r.Spend)) || 1;
     return '<div class="picks">' + list.slice(0,3).map(r =>
       '<div class="pick"><div class="who">'+chanIcon(r.chan)+'<span class="flag">'+(FLAGS[r.c]||"")+'</span>'+r.c+' <em>'+r.chan+'</em></div>'
@@ -682,28 +735,28 @@ function renderRecs(agg, p){
   const plays = [
     { cls:"stop", verb:"Stop", icon:STRAT_ICON.stop, title:"Spend with nothing to show",
       big:"$"+fmt(loserSpend,"m2"),
-      sub: losers.length ? "of spend across "+losers.length+" cells bought no funded accounts, or returned under 30 cents per dollar." : "Every cell with real spend produced at least one funded account.",
+      sub: losers.length ? "across "+losers.length+" cells with no funded accounts." : "Every cell funded at least one account.",
       body: picks(losers,"stop"),
-      next:"Cut these first, move the budget to the next card" },
+      next:"Cut these first" },
     { cls:"grow", verb:"Scale", icon:STRAT_ICON.grow, title:"Spend that pays for itself",
       big:"$"+fmt(winnerSpend,"m2"),
-      sub: winners.length ? "of spend returned $"+fmt(winnerDep,"m2")+" in deposits across "+winners.length+" cells. Every dollar here is already earning." : "No cell returned more than it cost this period. Hold budgets and re-check next week.",
+      sub: winners.length ? "returned $"+fmt(winnerDep,"m2")+" in deposits across "+winners.length+" cells." : "No cell beat its cost this period.",
       body: picks(winners,"grow"),
-      next:"Raise these budgets in steps, re-check next week" },
+      next:"Raise these budgets" },
     { cls:"back", verb:"Re-engage", icon:STRAT_ICON.back, title:"Accounts already paid for",
       big: nonFunded.toLocaleString("en-US"),
-      sub:"accounts were opened and never funded. The acquisition cost is already spent.",
+      sub:"accounts opened, never funded. Already paid for.",
       body: '<div class="split"><i class="f" style="width:'+fShare+'%"></i><i class="u" style="width:'+(100-fShare)+'%"></i></div>'
         + '<div class="keys"><div><span class="dot" style="background:#2fae63"></span>Funded <b>'+Math.round(funTot).toLocaleString("en-US")+'</b></div>'
         + '<div><span class="dot" style="background:#C9D7FE"></span>Opened, not funded <b>'+nonFunded.toLocaleString("en-US")+'</b></div></div>',
-      next:"Retarget, email and WhatsApp, small deposit bonus" }
+      next:"Retarget by email and WhatsApp" }
   ];
   document.getElementById("playbook").innerHTML = plays.map(pl =>
     '<div class="card play"><div class="playtop"><div class="badge '+pl.cls+'">'+pl.icon+'</div>'
     + '<div><div class="verb">'+pl.verb+'</div><h3>'+pl.title+'</h3></div></div>'
     + '<div class="headline '+pl.cls+'">'+pl.big+'</div><div class="subline">'+pl.sub+'</div>'
     + pl.body
-    + '<div class="donext">'+STRAT_ICON.arrow+pl.next+'</div></div>').join("");
+    + '<div class="donext"><span class="bubble '+pl.cls+'">'+STRAT_ICON.arrow+pl.next+'</span></div></div>').join("");
 
   document.getElementById("rivals").innerHTML =
     ["Exness","XM","IC Markets","Pepperstone","AvaTrade"].map(n=>'<span>'+n+'</span>').join("")
